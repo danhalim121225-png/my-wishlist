@@ -6,192 +6,225 @@
 <title>MY WISHLIST</title>
 
 <style>
-*{box-sizing:border-box}
-
-body{
-  margin:0;
-  background:#f4f0df;
-  color:#304638;
-  font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif;
+* {
+  box-sizing: border-box;
 }
 
-.container{
-  max-width:900px;
-  margin:auto;
-  padding:35px 18px 60px;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f0df;
+  color: #304735;
 }
 
-header{
-  text-align:center;
-  margin-bottom:25px;
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 30px 18px 50px;
 }
 
-header h1{
-  margin:0;
-  font-size:38px;
-  letter-spacing:3px;
-  color:#315b43;
+header {
+  text-align: center;
+  margin-bottom: 25px;
 }
 
-header p{
-  color:#718274;
-  margin-top:8px;
+h1 {
+  margin: 0;
+  font-size: 38px;
+  letter-spacing: 2px;
 }
 
-.card{
-  background:#fffdf5;
-  border-radius:28px;
-  padding:24px;
-  box-shadow:0 6px 20px rgba(48,70,56,.08);
-  margin-bottom:25px;
+.subtitle {
+  margin-top: 8px;
+  color: #71806d;
 }
 
-.money-title{
-  font-size:17px;
-  font-weight:bold;
+.money-card {
+  background: #ffffff;
+  border-radius: 25px;
+  padding: 25px;
+  box-shadow: 0 5px 18px rgba(50,70,50,.08);
+  margin-bottom: 30px;
 }
 
-.money-number{
-  font-size:32px;
-  font-weight:bold;
-  margin:8px 0 15px;
-  color:#315b43;
+.money-title {
+  font-size: 18px;
+  font-weight: bold;
 }
 
-input{
-  width:100%;
-  padding:13px;
-  margin-top:8px;
-  border:1px solid #d8dfd2;
-  border-radius:14px;
-  background:#faf9ef;
-  font-size:15px;
+.money-number {
+  font-size: 32px;
+  font-weight: bold;
+  margin: 8px 0;
 }
 
-.progress{
-  height:12px;
-  background:#e3e8dc;
-  border-radius:20px;
-  overflow:hidden;
-  margin-top:15px;
+input {
+  border: 1px solid #d5dccd;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 15px;
+  outline: none;
+  background: #fff;
 }
 
-.progress-bar{
-  height:100%;
-  width:0%;
-  background:#719b78;
-  transition:.3s;
+.money-inputs {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
 }
 
-.small{
-  color:#879287;
-  font-size:13px;
-  margin-top:8px;
+.money-inputs input {
+  width: 50%;
 }
 
-h2{
-  color:#315b43;
-  margin:30px 5px 15px;
+button {
+  border: none;
+  border-radius: 12px;
+  padding: 12px 16px;
+  background: #7d9b76;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
 }
 
-.categories{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:14px;
+.progress {
+  height: 12px;
+  background: #e5e8dc;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 15px 0 8px;
 }
 
-.category{
-  border:0;
-  background:#fffdf5;
-  color:#304638;
-  border-radius:25px;
-  padding:25px 8px;
-  font-size:16px;
-  box-shadow:0 5px 17px rgba(48,70,56,.07);
-  cursor:pointer;
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: #7d9b76;
+  transition: .3s;
 }
 
-.category span{
-  display:block;
-  font-size:35px;
-  margin-bottom:8px;
+.goal-text {
+  color: #71806d;
+  font-size: 14px;
 }
 
-.category:active{
-  transform:scale(.97);
+h2 {
+  margin: 25px 0 15px;
 }
 
-.selected{
-  background:#dce9d9;
+.categories {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
 }
 
-#items{
-  margin-top:25px;
+.category {
+  background: white;
+  border-radius: 22px;
+  padding: 28px 15px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 5px 18px rgba(50,70,50,.08);
+  transition: .2s;
 }
 
-.item{
-  background:#fffdf5;
-  border-radius:25px;
-  padding:18px;
-  margin-bottom:15px;
-  box-shadow:0 5px 17px rgba(48,70,56,.07);
+.category:hover {
+  transform: translateY(-3px);
 }
 
-.item img{
-  width:100%;
-  max-height:250px;
-  object-fit:cover;
-  border-radius:18px;
-  margin-bottom:12px;
+.category-icon {
+  font-size: 38px;
+  margin-bottom: 10px;
 }
 
-.item h3{
-  margin:5px 0;
-  color:#315b43;
+#categoryView {
+  display: none;
 }
 
-.item p{
-  margin:7px 0;
-  color:#718274;
+.back {
+  background: transparent;
+  color: #526750;
+  padding: 0;
+  margin-bottom: 15px;
 }
 
-.done{
-  opacity:.5;
-  text-decoration:line-through;
+.item-form {
+  background: white;
+  border-radius: 22px;
+  padding: 20px;
+  box-shadow: 0 5px 18px rgba(50,70,50,.08);
 }
 
-button.action{
-  border:0;
-  border-radius:12px;
-  padding:10px 14px;
-  margin:7px 5px 0 0;
-  background:#e5ecdf;
-  color:#304638;
-  cursor:pointer;
+.item-form input {
+  width: 100%;
+  margin-bottom: 10px;
 }
 
-button.delete{
-  background:#eee9dc;
+.item-form button {
+  width: 100%;
 }
 
-.add{
-  background:#719b78 !important;
-  color:white !important;
+.item-list {
+  margin-top: 18px;
 }
 
-.empty{
-  text-align:center;
-  color:#879287;
-  padding:25px;
+.item {
+  background: white;
+  border-radius: 18px;
+  padding: 17px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 3px 12px rgba(50,70,50,.06);
 }
 
-@media(max-width:600px){
-  .categories{
-    grid-template-columns:repeat(2,1fr);
+.item-info {
+  flex: 1;
+}
+
+.item-name {
+  font-weight: bold;
+}
+
+.item-price {
+  color: #71806d;
+  margin-top: 4px;
+}
+
+.item-memo {
+  font-size: 13px;
+  color: #929b8d;
+  margin-top: 4px;
+}
+
+.delete {
+  background: #e6b7ae;
+  padding: 8px 11px;
+}
+
+.empty {
+  text-align: center;
+  color: #899285;
+  padding: 25px;
+}
+
+@media (max-width: 600px) {
+  .categories {
+    grid-template-columns: repeat(2, 1fr);
   }
 
-  header h1{
-    font-size:30px;
+  h1 {
+    font-size: 30px;
+  }
+
+  .money-inputs {
+    flex-direction: column;
+  }
+
+  .money-inputs input {
+    width: 100%;
   }
 }
 </style>
@@ -203,242 +236,243 @@ button.delete{
 
 <header>
   <h1>MY WISHLIST</h1>
-  <p>사고 싶은 것들을 모아두는 곳 🛒</p>
+  <div class="subtitle">사고 싶은 것들을 모아두는 곳 🛒</div>
 </header>
 
-<div class="card">
+<div class="money-card">
   <div class="money-title">💰 현재 모은 돈</div>
   <div class="money-number" id="money">0원</div>
 
-  <input id="moneyInput" type="number" placeholder="현재 모은 돈">
-  <input id="targetInput" type="number" placeholder="목표 금액">
-
   <div class="progress">
-    <div class="progress-bar" id="bar"></div>
+    <div class="progress-bar" id="progress"></div>
   </div>
 
-  <div class="small" id="targetText">목표 금액: 0원</div>
+  <div class="goal-text" id="goalText">목표 0원</div>
+
+  <div class="money-inputs">
+    <input id="savedInput" type="number" placeholder="현재 모은 돈">
+    <input id="goalInput" type="number" placeholder="목표 금액">
+    <button onclick="saveMoney()">저장</button>
+  </div>
 </div>
 
-<h2>WISHLIST</h2>
+<div id="categoryList">
+  <h2>🛒 카테고리</h2>
 
-<div class="categories">
+  <div class="categories">
 
-<button class="category" onclick="selectCategory('애니메이션',this)">
-<span>🎬</span>애니메이션
-</button>
+    <div class="category" onclick="openCategory('애니메이션')">
+      <div class="category-icon">🎬</div>
+      애니메이션
+    </div>
 
-<button class="category" onclick="selectCategory('아이돌',this)">
-<span>🎤</span>아이돌
-</button>
+    <div class="category" onclick="openCategory('아이돌')">
+      <div class="category-icon">🎤</div>
+      아이돌
+    </div>
 
-<button class="category" onclick="selectCategory('책',this)">
-<span>📚</span>책
-</button>
+    <div class="category" onclick="openCategory('책')">
+      <div class="category-icon">📚</div>
+      책
+    </div>
 
-<button class="category" onclick="selectCategory('신발',this)">
-<span>👟</span>신발
-</button>
+    <div class="category" onclick="openCategory('신발')">
+      <div class="category-icon">👟</div>
+      신발
+    </div>
 
-<button class="category" onclick="selectCategory('옷',this)">
-<span>👕</span>옷
-</button>
+    <div class="category" onclick="openCategory('옷')">
+      <div class="category-icon">👕</div>
+      옷
+    </div>
 
-<button class="category" onclick="selectCategory('장난감',this)">
-<span>🧸</span>장난감
-</button>
+    <div class="category" onclick="openCategory('장난감')">
+      <div class="category-icon">🧸</div>
+      장난감
+    </div>
 
+  </div>
 </div>
 
-<div id="items"></div>
+<div id="categoryView">
+
+  <button class="back" onclick="goBack()">← 카테고리로</button>
+
+  <h2 id="categoryTitle"></h2>
+
+  <div class="item-form">
+    <input id="itemName" placeholder="사고 싶은 것">
+    <input id="itemPrice" type="number" placeholder="가격">
+    <input id="itemMemo" placeholder="메모">
+    <button onclick="addItem()">＋ 위시리스트에 추가</button>
+  </div>
+
+  <div class="item-list" id="itemList"></div>
+
+</div>
 
 </div>
 
 <script>
+let currentCategory = "";
 
-let items=JSON.parse(localStorage.getItem("myWishlist"))||[];
-let currentCategory=null;
+let items = JSON.parse(localStorage.getItem("wishlistItems")) || [];
 
-const moneyInput=document.getElementById("moneyInput");
-const targetInput=document.getElementById("targetInput");
+let savedMoney = Number(localStorage.getItem("savedMoney")) || 0;
+let goalMoney = Number(localStorage.getItem("goalMoney")) || 0;
 
-moneyInput.value=localStorage.getItem("money")||"";
-targetInput.value=localStorage.getItem("target")||"";
+function updateMoney() {
+  document.getElementById("money").textContent =
+    savedMoney.toLocaleString() + "원";
 
-function updateMoney(){
+  document.getElementById("goalText").textContent =
+    "목표 " + goalMoney.toLocaleString() + "원";
 
-  let money=Number(moneyInput.value)||0;
-  let target=Number(targetInput.value)||0;
+  let percent = goalMoney > 0
+    ? Math.min((savedMoney / goalMoney) * 100, 100)
+    : 0;
 
-  localStorage.setItem("money",money);
-  localStorage.setItem("target",target);
-
-  document.getElementById("money").textContent=
-    money.toLocaleString()+"원";
-
-  document.getElementById("targetText").textContent=
-    "목표 금액: "+target.toLocaleString()+"원";
-
-  let percent=target ? Math.min(money/target*100,100):0;
-
-  document.getElementById("bar").style.width=percent+"%";
+  document.getElementById("progress").style.width = percent + "%";
 }
 
-moneyInput.addEventListener("input",updateMoney);
-targetInput.addEventListener("input",updateMoney);
+function saveMoney() {
+  savedMoney = Number(document.getElementById("savedInput").value) || 0;
+  goalMoney = Number(document.getElementById("goalInput").value) || 0;
 
-function selectCategory(category,button){
+  localStorage.setItem("savedMoney", savedMoney);
+  localStorage.setItem("goalMoney", goalMoney);
 
-  currentCategory=category;
-
-  document.querySelectorAll(".category")
-    .forEach(b=>b.classList.remove("selected"));
-
-  button.classList.add("selected");
-
-  showItems();
+  updateMoney();
 }
 
-function addItem(){
+function openCategory(category) {
+  currentCategory = category;
 
-  if(!currentCategory){
-    alert("먼저 카테고리를 골라줘!");
+  document.getElementById("categoryList").style.display = "none";
+  document.getElementById("categoryView").style.display = "block";
+
+  document.getElementById("categoryTitle").textContent = category;
+
+  renderItems();
+}
+
+function goBack() {
+  document.getElementById("categoryView").style.display = "none";
+  document.getElementById("categoryList").style.display = "block";
+}
+
+function addItem() {
+  const name = document.getElementById("itemName").value.trim();
+  const price = Number(document.getElementById("itemPrice").value) || 0;
+  const memo = document.getElementById("itemMemo").value.trim();
+
+  if (!name) {
+    alert("사고 싶은 것을 입력해줘!");
     return;
   }
-
-  let name=prompt("물건 이름을 입력해줘!");
-  if(!name)return;
-
-  let price=prompt("가격을 입력해줘!");
-  if(price===null)return;
-
-  let memo=prompt("메모를 입력해줘! (없으면 취소)");
-
-  let photo=prompt(
-    "사진은 다음 단계에서 넣을 수 있어! 지금은 사진 없이 추가할게."
-  );
 
   items.push({
-    category:currentCategory,
-    name:name,
-    price:Number(price)||0,
-    memo:memo||"",
-    done:false
+    category: currentCategory,
+    name: name,
+    price: price,
+    memo: memo,
+    bought: false
   });
 
-  localStorage.setItem("myWishlist",JSON.stringify(items));
+  localStorage.setItem("wishlistItems", JSON.stringify(items));
 
-  showItems();
+  document.getElementById("itemName").value = "";
+  document.getElementById("itemPrice").value = "";
+  document.getElementById("itemMemo").value = "";
+
+  renderItems();
 }
 
-function showItems(){
+function renderItems() {
+  const list = document.getElementById("itemList");
 
-  let area=document.getElementById("items");
-
-  area.innerHTML="";
-
-  if(!currentCategory){
-    area.innerHTML=
-      '<div class="empty">카테고리를 눌러서 위시리스트를 시작해봐 🌿</div>';
-    return;
-  }
-
-  let filtered=items.filter(
-    item=>item.category===currentCategory
+  const filtered = items.filter(
+    item => item.category === currentCategory
   );
 
-  let addButton=document.createElement("button");
-
-  addButton.className="action add";
-  addButton.textContent="+ 물건 추가하기";
-  addButton.onclick=addItem;
-
-  area.appendChild(addButton);
-
-  if(filtered.length===0){
-
-    let empty=document.createElement("div");
-    empty.className="empty";
-    empty.textContent="아직 담아둔 물건이 없어 🤍";
-    area.appendChild(empty);
-
+  if (filtered.length === 0) {
+    list.innerHTML = '<div class="empty">아직 추가한 위시리스트가 없어!</div>';
     return;
   }
 
-  filtered.forEach(item=>{
+  list.innerHTML = "";
 
-    let realIndex=items.indexOf(item);
+  filtered.forEach((item) => {
 
-    let box=document.createElement("div");
-    box.className="item";
+    const realIndex = items.indexOf(item);
 
-    box.innerHTML=`
-      <h3 class="${item.done?"done":""}">
-        ${escapeHTML(item.name)}
-      </h3>
+    const div = document.createElement("div");
+    div.className = "item";
 
-      <p>💵 ${item.price.toLocaleString()}원</p>
+    div.innerHTML = `
+      <input
+        type="checkbox"
+        ${item.bought ? "checked" : ""}
+        onchange="toggleBought(${realIndex})"
+      >
 
-      ${
-        item.memo
-        ? `<p>📝 ${escapeHTML(item.memo)}</p>`
-        : ""
-      }
+      <div class="item-info">
+        <div class="item-name">
+          ${escapeHTML(item.name)}
+        </div>
 
-      <button class="action"
-        onclick="toggleDone(${realIndex})">
-        ${item.done?"구매 완료 취소":"✓ 구매 완료"}
-      </button>
+        <div class="item-price">
+          ${item.price.toLocaleString()}원
+        </div>
 
-      <button class="action delete"
-        onclick="deleteItem(${realIndex})">
-        🗑 삭제
+        ${
+          item.memo
+          ? `<div class="item-memo">${escapeHTML(item.memo)}</div>`
+          : ""
+        }
+      </div>
+
+      <button class="delete" onclick="deleteItem(${realIndex})">
+        삭제
       </button>
     `;
 
-    area.appendChild(box);
+    list.appendChild(div);
   });
 }
 
-function toggleDone(index){
-
-  items[index].done=!items[index].done;
+function toggleBought(index) {
+  items[index].bought = !items[index].bought;
 
   localStorage.setItem(
-    "myWishlist",
+    "wishlistItems",
     JSON.stringify(items)
   );
 
-  showItems();
+  renderItems();
 }
 
-function deleteItem(index){
-
-  if(!confirm("이 물건을 삭제할까?"))return;
-
-  items.splice(index,1);
+function deleteItem(index) {
+  items.splice(index, 1);
 
   localStorage.setItem(
-    "myWishlist",
+    "wishlistItems",
     JSON.stringify(items)
   );
 
-  showItems();
+  renderItems();
 }
 
-function escapeHTML(text){
-
-  return String(text)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+function escapeHTML(text) {
+  const div = document.createElement("div");
+  div.textContent = text;
+  return div.innerHTML;
 }
+
+document.getElementById("savedInput").value = savedMoney || "";
+document.getElementById("goalInput").value = goalMoney || "";
 
 updateMoney();
-showItems();
-
 </script>
 
 </body>
