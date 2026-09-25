@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MY WISHLIST</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+  background: #fff8fb;
+  color: #333;
+}
+
+.container {
+  max-width: 900px;
+  margin: auto;
+  padding: 35px 20px 60px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 34px;
+  letter-spacing: 2px;
+}
+
+header p {
+  color: #999;
+  margin-top: 8px;
+}
+
+.money {
+  background: white;
+  border-radius: 22px;
+  padding: 25px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.06);
+  margin-bottom: 35px;
+}
+
+.money-title {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.money-number {
+  font-size: 30px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.money input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #eee;
+  border-radius: 12px;
+  margin-top: 8px;
+  font-size: 15px;
+}
+
+.progress {
+  height: 12px;
+  background: #eee;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 15px 0 8px;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: #ff9fc1;
+  transition: 0.3s;
+}
+
+.target-text {
+  color: #999;
+  font-size: 13px;
+}
+
+h2 {
+  margin-bottom: 18px;
+}
+
+.categories {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.category {
+  background: white;
+  border: none;
+  border-radius: 22px;
+  padding: 28px 10px;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 5px 18px rgba(0,0,0,0.05);
+  transition: 0.2s;
+}
+
+.category:hover {
+  transform: translateY(-3px);
+}
+
+.category span {
+  display: block;
+  font-size: 35px;
+  margin-bottom: 8px;
+}
+
+#items {
+  margin-top: 30px;
+}
+
+.item-box {
+  background: white;
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.item-box h3 {
+  margin: 0 0 7px;
+}
+
+.item-box p {
+  margin: 5px 0;
+  color: #777;
+}
+
+button {
+  font-family: inherit;
+}
+
+.action {
+  border: none;
+  border-radius: 10px;
+  padding: 9px 13px;
+  margin: 5px 5px 0 0;
+  cursor: pointer;
+  background: #f5f5f5;
+}
+
+.add {
+  background: #ffb2cc;
+  color: white;
+}
+
+.delete {
+  background: #eee;
+}
+
+.done {
+  text-decoration: line-through;
+  opacity: 0.5;
+}
+
+@media (max-width: 600px) {
+  .categories {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  header h1 {
+    font-size: 28px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<header>
+  <h1>MY WISHLIST</h1>
+  <p>사고 싶은 것들을 모아두는 곳 🛒</p>
+</header>
+
+<section class="money">
+  <div class="money-title">💰 현재 모은 돈</div>
+  <div class="money-number" id="savedMoney">0원</div>
+
+  <input
+    type="number"
+    id="moneyInput"
+    placeholder="현재 모은 돈 입력"
+    onchange="saveMoney()"
+  >
+
+  <input
+    type="number"
+    id="targetInput"
+    placeholder="목표 금액 입력"
+    onchange="saveMoney()"
+  >
+
+  <div class="progress">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+
+  <div class="target-text" id="targetText">
+    목표 금액: 0원
+  </div>
+</section>
+
+<h2>WISHLIST</h2>
+
+<div class="categories">
+
+<button class="category" onclick="addItem('애니메이션')">
+  <span>🎬</span>
+  애니메이션
+</button>
+
+<button class="category" onclick="addItem('아이돌')">
+  <span>🎤</span>
+  아이돌
+</button>
+
+<button class="category" onclick="addItem('책')">
+  <span>📚</span>
+  책
+</button>
+
+<button class="category" onclick="addItem('신발')">
+  <span>👟</span>
+  신발
+</button>
+
+<button class="category" onclick="addItem('옷')">
+  <span>👕</span>
+  옷
+</button>
+
+<button class="category" onclick="addItem('장난감')">
+  <span>🧸</span>
+  장난감
+</button>
+
+</div>
+
+<div id="items"></div>
+
+</div>
+
+<script>
+
+let items = JSON.parse(localStorage.getItem("wishlistItems")) || [];
+
+function saveMoney() {
+  let money = Number(document.getElementById("moneyInput").value) || 0;
+  let target = Number(document.getElementById("targetInput").value) || 0;
+
+  localStorage.setItem("savedMoney", money);
+  localStorage.setItem("targetMoney", target);
+
+  updateMoney();
+}
+
+function updateMoney() {
+  let money = Number(localStorage.getItem("savedMoney")) || 0;
+  let target = Number(localStorage.getItem("targetMoney")) || 0;
+
+  document.getElementById("moneyInput").value = money || "";
+  document.getElementById("targetInput").value = target || "";
+
+  document.getElementById("savedMoney").textContent =
+    money.toLocaleString() + "원";
+
+  document.getElementById("targetText").textContent =
+    "목표 금액: " + target.toLocaleString() + "원";
+
+  let percent = target > 0 ? (money / target) * 100 : 0;
+  percent = Math.min(percent, 100);
+
+  document.getElementById("progressBar").style.width = percent + "%";
+}
+
+function addItem(category) {
+
+  let name = prompt(category + "에 추가할 물건 이름을 입력해줘!");
+
+  if (!name) return;
+
+  let price = prompt("가격을 입력해줘!");
+
+  if (!price) price = 0;
+
+  let memo = prompt("메모가 있으면 입력해줘!");
+
+  items.push({
+    category: category,
+    name: name,
+    price: Number(price),
+    memo: memo || "",
+    done: false
+  });
+
+  localStorage.setItem("wishlistItems", JSON.stringify(items));
+
+  showItems();
+}
+
+function toggleDone(index) {
+  items[index].done = !items[index].done;
+
+  localStorage.setItem("wishlistItems", JSON.stringify(items));
+
+  showItems();
+}
+
+function deleteItem(index) {
+  items.splice(index, 1);
+
+  localStorage.setItem("wishlistItems", JSON.stringify(items));
+
+  showItems();
+}
+
+function showItems() {
+
+  let area = document.getElementById("items");
+
+  area.innerHTML = "";
+
+  items.forEach(function(item, index) {
+
+    let box = document.createElement("div");
+    box.className = "item-box";
+
+    box.innerHTML = `
+      <h3 class="${item.done ? "done" : ""}">
+        ${item.name}
+      </h3>
+
+      <p>📂 ${item.category}</p>
+      <p>💵 ${Number(item.price).toLocaleString()}원</p>
+      ${item.memo ? `<p>📝 ${item.memo}</p>` : ""}
+
+      <button class="action" onclick="toggleDone(${index})">
+        ${item.done ? "구매 완료 취소" : "구매 완료"}
+      </button>
+
+      <button class="action delete" onclick="deleteItem(${index})">
+        삭제
+      </button>
+    `;
+
+    area.appendChild(box);
+  });
+}
+
+updateMoney();
+showItems();
+
+</script>
+
+</body>
+</html>
